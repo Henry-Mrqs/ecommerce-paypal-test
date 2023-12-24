@@ -1,6 +1,7 @@
 type UserType = {
     name: string;
     lastName: string;
+    phone: string;
     email: string;
     address: AddressType;
 };
@@ -9,21 +10,22 @@ type AddressType = {
     linha1: string;
     linha2: string;
     state: string;
-    zip: number;
-    country: number;
+    zip: string;
+    country: string;
 };
 
 const user: UserType[] = [
     {
         name: '',
         lastName: '',
+        phone: '',
         email: '',
         address: {
             linha1: '',
             linha2: '',
             state: '',
-            zip: 0,
-            country: 0,
+            zip: '',
+            country: '',
         }
     }
 ];
