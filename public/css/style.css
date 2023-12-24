@@ -139,7 +139,18 @@ body{
 /* SHOP */
 
     .container-shop{
+        display: flex;
         margin-left: 8%;
+    }
+    .left-content{
+        width: 64%;
+    }
+    .right-content{
+        background: #684b2a;
+        width: 33%;
+        height: 100vh;
+        position: fixed;
+        right: 0;
     }
 
     div.title-shop{
@@ -150,34 +161,66 @@ body{
         font-weight: 600;
     }
 
+    .flex-product{
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 80px 30px;
+    }
+
     div.product img{
         width: 300px;
         height: 360px;
         object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 10px;
     }
 
     div.product .description{
         display: flex;
         width: 300px;
         justify-content: space-between;
+        height: 60px;
+        align-items: center;
     }
     div.product .description .text{
         flex: 3;
     }
     div.product .description .call-to-action{
         flex: 1;
-    }
-
-
-    .container-shop{
         display: flex;
+        justify-content: flex-end;
     }
-    .left-content{
-        width: 66%;
+
+    div.product .description .call-to-action form{
+        margin-bottom: 0;
     }
-    .right-content{
-        background: #684b2a;
-        width: 33%;
+
+    div.product .text p{
+        font-weight: 600;
+        font-size: 17px;
+        margin-bottom: 0;
     }
+
+    div.product .text p.value-product{
+        color: #9b8f82;
+        margin-top: 3px;
+    }
+
+    div.call-to-action button {
+        width: 75px;
+        height: 40px;
+        outline: none;
+        border: 2px solid #f1c40f;
+        border-radius: 25px;
+        box-shadow: 10px 10px 40px rgba(0,0,0,.1);
+        padding: 0;
+    }
+    div.call-to-action button:hover{
+        border: 3px solid #f1c40f;
+        box-shadow: 10px 10px 40px rgba(0,0,0,.2);
+        background: #ecf0f1;
+    }
+    
 
 /* SHOP */

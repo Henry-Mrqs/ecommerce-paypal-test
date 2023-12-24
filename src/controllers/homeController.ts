@@ -1,15 +1,18 @@
 import { Request, Response } from "express";
-import { User } from "../models/User";
+import { User, UserType } from "../models/User";
 
 export const home = (req: Request, res: Response) => {
-    res.render('pages/home');
+    const usersArray = User.getAll();
+    res.render('pages/home', {
+        usersArray
+    });
 }
 
 export const homeSubmit = (req: Request, res: Response) => {
     try {
         if (req.body) {
             // Certifique-se de que req.body tem a estrutura correta (UserType)
-            const newUser = req.body;
+            const newUser: UserType = req.body;
 
             // Obtenha o array de usuários
             const usersArray = User.getAll();
@@ -25,10 +28,11 @@ export const homeSubmit = (req: Request, res: Response) => {
             }
 
             // Armazene o array atualizado em um cookie
-            res.cookie('users', JSON.stringify(usersArray));
+            res.cookie('users', JSON.stringify(usersArray), { path: '/shop' }); // Defina o caminho correto
 
             console.log("Usuários atualizados:", usersArray);
-            res.render('pages/shop');
+            // Redirecione para a rota de shop após definir o cookie
+            res.redirect('/shop');
         } else {
             console.error("Erro ao processar a solicitação: Body vazio");
             res.status(500).send("Erro interno do servidor");
@@ -38,3 +42,5 @@ export const homeSubmit = (req: Request, res: Response) => {
         res.status(500).send("Erro interno do servidor");
     }
 }
+
+

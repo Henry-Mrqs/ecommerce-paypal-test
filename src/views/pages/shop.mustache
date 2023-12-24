@@ -13,121 +13,33 @@
                         <h1>CHOOSE YOUR NEW STYLE</h1>
                     </div>
                     <hr>
-                    <div class="row">
+                    <div class="flex-product">
 
-                        <div class="col-md-6 col-lg-6 product">
+                        {{ #productList }}
+
+                            <div class="product">
                         
-                            <img src="/assets/none.png" alt="">
-                            <div class="description">
+                                <img src="/assets/{{ image }}" alt="{{ name }}">
+                                <div class="description">
 
-                                <div class="text">
-                                    <p class="name-product">lotem impsum sit dolor.</p>
-                                    <p class="value-product">$90.75</p>
+                                    <div class="text">
+                                        <p class="name-product">{{ name }}</p>
+                                        <p class="value-product">{{ price }}</p>
+                                    </div>
+
+                                    <div class="call-to-action">
+                                        <form method="POST">
+                                            <input type="hidden" name="productId" value="{{ id }}">
+                                            <button type="submit">Buy</button>
+                                        </form>
+                                    </div>
+
                                 </div>
 
-                                <div class="call-to-action">
-                                    <button type="submit">Add to cart</button>
-                                </div>
+                            </div> 
 
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 product">
-                        
-                            <img src="/assets/none.png" alt="">
-                            <div class="description">
-
-                                <div class="text">
-                                    <p class="name-product">lotem impsum sit dolor.</p>
-                                    <p class="value-product">$90.75</p>
-                                </div>
-
-                                <div class="call-to-action">
-                                    <button type="submit">Add to cart</button>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 product">
-                        
-                            <img src="/assets/none.png" alt="">
-                            <div class="description">
-
-                                <div class="text">
-                                    <p class="name-product">lotem impsum sit dolor.</p>
-                                    <p class="value-product">$90.75</p>
-                                </div>
-
-                                <div class="call-to-action">
-                                    <button type="submit">Add to cart</button>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 product">
-                        
-                            <img src="/assets/none.png" alt="">
-                            <div class="description">
-
-                                <div class="text">
-                                    <p class="name-product">lotem impsum sit dolor.</p>
-                                    <p class="value-product">$90.75</p>
-                                </div>
-
-                                <div class="call-to-action">
-                                    <button type="submit">Add to cart</button>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 product">
-                        
-                            <img src="/assets/none.png" alt="">
-                            <div class="description">
-
-                                <div class="text">
-                                    <p class="name-product">lotem impsum sit dolor.</p>
-                                    <p class="value-product">$90.75</p>
-                                </div>
-
-                                <div class="call-to-action">
-                                    <button type="submit">Add to cart</button>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 product">
-                        
-                            <img src="/assets/none.png" alt="">
-                            <div class="description">
-
-                                <div class="text">
-                                    <p class="name-product">lotem impsum sit dolor.</p>
-                                    <p class="value-product">$90.75</p>
-                                </div>
-
-                                <div class="call-to-action">
-                                    <button type="submit">Add to cart</button>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 product">
-                        
-                            <img src="/assets/none.png" alt="">
-                            <div class="description">
-
-                                <div class="text">
-                                    <p class="name-product">lotem impsum sit dolor.</p>
-                                    <p class="value-product">$90.75</p>
-                                </div>
-
-                                <div class="call-to-action">
-                                    <button type="submit">Add to cart</button>
-                                </div>
-
-                            </div>
-                        </div>
-                        
+                        {{/productList}}
+                                                
                     </div>
         
             </div>

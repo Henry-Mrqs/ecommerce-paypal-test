@@ -1,37 +1,35 @@
+type AddressType = {
+    line1: string;
+    line2: string;
+    state: string;
+    zip: string;
+    country: string;
+};
+
+type CartItemType = {
+    productId: number;
+    quantity: number;
+};
+
 type UserType = {
     name: string;
     lastName: string;
     phone: string;
     email: string;
     address: AddressType;
+    cart: CartItemType[]; // Adicione a propriedade cart ao tipo UserType
 };
 
-type AddressType = {
-    linha1: string;
-    linha2: string;
-    state: string;
-    zip: string;
-    country: string;
-};
-
-const user: UserType[] = [
-    {
-        name: '',
-        lastName: '',
-        phone: '',
-        email: '',
-        address: {
-            linha1: '',
-            linha2: '',
-            state: '',
-            zip: '',
-            country: '',
-        }
-    }
-];
+const users: UserType[] = [];
 
 export const User = {
     getAll: (): UserType[] => {
-        return user;
+        return users;
+    },
+    addUser: (newUser: UserType) => {
+        users.length = 0;  // Limpa o array antes de adicionar um novo usuário
+        users.push(newUser);
     }
 };
+
+export { UserType, CartItemType };
