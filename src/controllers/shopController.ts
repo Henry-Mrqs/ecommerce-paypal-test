@@ -1,5 +1,4 @@
-import { Request,Response } from "express";
-
+import { Request, Response } from "express";
 import { Product } from "../models/Product";
 
 export const shop = (req: Request, res: Response) => {
@@ -8,4 +7,3 @@ export const shop = (req: Request, res: Response) => {
         productList
     });
 }
-

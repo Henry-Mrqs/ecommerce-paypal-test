@@ -146,11 +146,16 @@ body{
         width: 64%;
     }
     .right-content{
-        background: #684b2a;
+        background: rgb(82,68,64);
+        background: -moz-radial-gradient(circle, rgba(82,68,64,1) 0%, rgba(64,60,59,1) 100%);
+        background: -webkit-radial-gradient(circle, rgba(82,68,64,1) 0%, rgba(64,60,59,1) 100%);
+        background: radial-gradient(circle, rgba(82,68,64,1) 0%, rgba(64,60,59,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#524440",endColorstr="#403c3b",GradientType=1);
         width: 33%;
         height: 100vh;
         position: fixed;
         right: 0;
+        overflow-y: scroll;
     }
 
     div.title-shop{
@@ -221,6 +226,75 @@ body{
         box-shadow: 10px 10px 40px rgba(0,0,0,.2);
         background: #ecf0f1;
     }
+
+    div.padding-resume{
+        padding: 100px 60px;
+    }
+    div.padding-resume h2{
+        color: #f1c40f;
+    }
+
+    .product-resume{
+        margin-top: 60px;
+        display: flex;
+        background: rgba( 255, 255, 255, 0.35 );
+        box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+        backdrop-filter: blur( 13.5px );
+        -webkit-backdrop-filter: blur( 13.5px );
+        border-radius: 10px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        height: 90px;
+        width: 100%;
+        padding: 10px;
+        align-items: center;
+        gap: 15px;
+        justify-content: space-between;
+    }
+
+    .product-resume img{
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+    }
+
+    .description p{
+        margin: 0;
+    }
+
+    .quantity-product{
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+    .quantity-product p {
+        margin: 0;
+    }
+    .incrase-decrase{
+        display: flex;
+        flex-direction: column;
+    }
+
+
+
+
+
+    /*Scroll Bar*/
+
+    div.right-content::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    div.right-content::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    div.right-content::-webkit-scrollbar-thumb {
+        border: 1px solid transparent;
+        background: #a8a8a8;
+    }
+
+/*Scroll Bar End*/
     
 
 /* SHOP */

@@ -1,62 +1,118 @@
 {{>partials/head}}
 <body>
-    {{>partials/head}}
-
     <div class="container-shop">
-
-
         <div class="left-content">
             <div class="container">
-
                 {{>partials/header}}
-                    <div class="title-shop">
-                        <h1>CHOOSE YOUR NEW STYLE</h1>
-                    </div>
-                    <hr>
-                    <div class="flex-product">
-
-                        {{ #productList }}
-
-                            <div class="product">
-                        
-                                <img src="/assets/{{ image }}" alt="{{ name }}">
-                                <div class="description">
-
-                                    <div class="text">
-                                        <p class="name-product">{{ name }}</p>
-                                        <p class="value-product">{{ price }}</p>
-                                    </div>
-
-                                    <div class="call-to-action">
-                                        <form method="POST">
-                                            <input type="hidden" name="productId" value="{{ id }}">
-                                            <button type="submit">Buy</button>
-                                        </form>
-                                    </div>
+                <div class="title-shop">
+                    <h1>CHOOSE YOUR NEW STYLE</h1>
+                </div>
+                <hr>
+                <div class="flex-product">
+                    {{ #productList }}
+                        <div class="product">
+                            <img src="/assets/{{ image }}" alt="{{ name }}">
+                            <div class="description">
+                                <div class="text">
+                                    <p class="name-product">{{ name }}</p>
+                                    <p class="value-product">${{ price }}</p>
+                                </div>
+                                <div class="call-to-action">
+                                    <form class="addToCartForm">
+                                        <input type="hidden" name="productId" value="{{productId}}">
+                                        <input type="hidden" name="image" value="{{image}}">
+                                        <input type="hidden" name="name" value="{{name}}">
+                                        <input type="hidden" name="price" value="{{price}}">
+                                        <button type="button" onclick="addToCart(this)">Buy</button>
+                                    </form>
 
                                 </div>
-
-                            </div> 
-
-                        {{/productList}}
-                                                
-                    </div>
-        
+                            </div>
+                        </div> 
+                    {{ /productList }}
+                </div>
             </div>
         </div>
-
         <div class="right-content">
-        
-        
-        
+            <div class="padding-resume">
+                <h2>Cart Resume</h2>
+                <div id="cart-content">
+                    
+                </div>
+            </div>
         </div>
-
-        
-
-
     </div>
-
+        
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+            function addToCart(button) {
+                var form = button.parentElement;
+                var productId = form.querySelector('[name="productId"]').value;
+                var image = form.querySelector('[name="image"]').value;
+                var name = form.querySelector('[name="name"]').value;
+                var price = form.querySelector('[name="price"]').value;
+
+                // Obtenha o array de produtos do localStorage (ou inicie um novo array se não existir)
+                var productsInCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+                // Verifique se o produto já está no carrinho
+                var existingProduct = productsInCart.find(product => product.productId === productId);
+
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    // Adicione um novo item ao carrinho
+                    productsInCart.push({ productId, image, name, price, quantity: 1 });
+                }
+
+                // Atualize o array de produtos no localStorage
+                localStorage.setItem('cart', JSON.stringify(productsInCart));
+
+                // Exiba uma mensagem ou atualize visualmente o carrinho (opcional)
+                alert('Produto adicionado ao carrinho!');
+
+                // Atualize a exibição dos produtos no carrinho
+                updateCartDisplay();
+            }
+
+            // Função para atualizar a exibição do carrinho
+            function updateCartDisplay() {
+                var cartContent = document.getElementById('cart-content');
+                var productsInCart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+                // Limpe o conteúdo atual do carrinho
+                cartContent.innerHTML = '';
+
+                // Adicione os produtos ao carrinho
+                productsInCart.forEach(product => {
+                    var productElement = document.createElement('div');
+                    productElement.innerHTML = `
+                    <div class="product-resume">
+                        <img src="/assets/${product.image}" alt="${product.name}">
+
+                        <div class="description">
+                            <p class="name-product">${product.name}</p>
+                            <p class="value-product">${product.price}</p>
+                        </div>
+
+                        <div class="quantity-product">
+                            <p>${product.quantity}</p>
+                            <div class="incrase-decrase">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>`;
+                    cartContent.appendChild(productElement);
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                updateCartDisplay();
+            });
+        </script>
+
+
 </body>
 </html>
