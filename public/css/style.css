@@ -276,6 +276,33 @@ body{
     }
 
 
+    #send-cart {
+        display: flex;
+        justify-content: center;
+    }
+    button.send-cart-btn {
+        color: #fff;
+        width: 90px;
+        height: 50px;
+        outline: none;
+        border: 2px solid #f1c40f;
+        border-radius: 25px;
+        padding: 0;
+        margin-top: 60px;
+        background: rgba( 255, 255, 255, 0.35 );
+        box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+        backdrop-filter: blur( 13.5px );
+        -webkit-backdrop-filter: blur( 13.5px );
+    }
+
+    button.send-cart-btn:hover{
+        border: 3px solid #f1c40f;
+        box-shadow: 0 8px 32px 0 rgba(209, 255, 199, 0.37);
+        background: rgba(255, 255, 255, 0.457);
+    }
+
+
+
 
 
 
@@ -295,6 +322,73 @@ body{
     }
 
 /*Scroll Bar End*/
+
+
+/*toastHBox*/
+
+    #toastHBox{
+        position: fixed;
+        top: -25px;
+        left: 19%;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 20px;
+    }
+
+    .toastH{
+        width: 300px;
+        height: 50px;
+        background: rgba(189, 233, 180, 0.5);
+        box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+        backdrop-filter: blur( 13.5px );
+        -webkit-backdrop-filter: blur( 13.5px );
+        font-weight: 600;
+        margin: 15px 0;
+        display: flex;
+        align-items: center;
+        position: relative;
+        transform: translateY(-100%);
+        animation: movedown 0.3s linear forwards;
+        border-radius: 25px;
+    }
+
+    .toastH i{
+        margin: 0 10px 0 20px;
+        font-size: 28px;
+        color: #00ff00;
+        font-weight: 400px;
+    }
+
+    .toastH::after{
+        content: '';
+        position: absolute;
+        left: 18px;
+        bottom: 0;
+        width: 270px;
+        height: 2px;
+        background-color: #00ff00;
+        animation: anim 1.5s linear forwards;
+    }
+
+    .toastH p{
+        margin: 0;
+        text-shadow: 3px 1px 7px rgba(255,255,255,0.9);
+    }
+
+    @keyframes anim{
+        100%{
+            width: 0;
+        }
+    }
+    @keyframes movedown{
+        100%{
+            transform: translateY(20%);
+        }
+    }
+
+/*toastHBox*/
     
 
 /* SHOP */
