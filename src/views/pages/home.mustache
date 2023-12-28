@@ -55,10 +55,6 @@
                                     <a class="nav-link disabled" aria-current="page" href="http://localhost/shop">Shop</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" aria-current="page" href="http://localhost/cart">Cart</a>
-                                </li>
-
                             </ul>
 
                             {{!--
@@ -87,18 +83,18 @@
 
                             <div class="name">
                                 <i class="fa fa-user" aria-hidden="true"></i>
-                                <input type="text" name="name" id="name" value="Emma" placeholder="Name">
-                                <input type="text" name="lastName" id="lastName" value="Miller Thompson" placeholder="Last Name">
+                                <input type="text" name="name" id="name" value="Emma" placeholder="Name" required>
+                                <input type="text" name="lastName" id="lastName" value="Miller Thompson" placeholder="Last Name" required>
                             </div>
 
                             <div class="phone">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
-                                <input type="text" name="phone" id="phone" value="+1 (646) 265-7864" placeholder="Phone">
+                                <input type="text" name="phone" id="phone" value="+1 (646) 265-7864" placeholder="Phone" required>
                             </div>
 
                             <div class="email">
                                 <i class="fa fa-at" aria-hidden="true"></i>
-                                <input type="text" name="email" id="email" value="emma.shopper28@gmail.com" placeholder="Email">
+                                <input type="text" name="email" id="email" value="emma.shopper28@gmail.com" placeholder="Email" required>
                             </div>
 
                             <h4>Address</h4>
@@ -106,14 +102,14 @@
 
                             <div class="address">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <input type="text" name="address.line1" id="addressLine1" value="1150 Sterling Pl Apt 8" placeholder="Address line 1">
-                                <input type="text" name="address.line2" id="addressLine2" value="Brooklyn, NY" placeholder="Address line 2">
+                                <input type="text" name="address[line1]" id="addressLine1" value="1150 Sterling Pl Apt 8" placeholder="Address line 1" required>
+                                <input type="text" name="address[line2]" id="addressLine2" value="Brooklyn, NY" placeholder="Address line 2" required>
                             </div>
 
                             <div class="address-cont">
-                                <input type="text" name="address.state" id="state" value="New York" placeholder="State">
-                                <input type="text" name="address.country" id="country" value="United State" placeholder="Country">
-                                <input type="text" name="address.zip" id="zip" value="11213" placeholder="Zip">
+                                <input type="text" name="address[state]" id="state" value="New York" placeholder="State" required>
+                                <input type="text" name="address[country]" id="country" value="United State" placeholder="Country" required>
+                                <input type="text" name="address[zip]" id="zip" value="11213" placeholder="Zip" required>
                             </div>
 
                             <div class="btn-submit">

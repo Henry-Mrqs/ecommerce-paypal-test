@@ -2,10 +2,8 @@ import { Request, Response } from "express";
 import { User, UserType } from "../models/User";
 
 export const home = (req: Request, res: Response) => {
-    const usersArray = User.getAll();
-    res.render('pages/home', {
-        usersArray
-    });
+    console.log("Usuários Existentes:", User.getAll());
+    res.render('pages/home');
 }
 
 export const homeSubmit = (req: Request, res: Response) => {
@@ -17,20 +15,12 @@ export const homeSubmit = (req: Request, res: Response) => {
             // Obtenha o array de usuários
             const usersArray = User.getAll();
 
-            // Verifique se já existe um usuário com o mesmo email
-            const existingUserIndex = usersArray.findIndex(user => user.email === newUser.email);
+            //Adicione o novo usuário
 
-            // Se já existe, substitua-o; caso contrário, adicione o novo usuário
-            if (existingUserIndex !== -1) {
-                usersArray[existingUserIndex] = newUser;
-            } else {
+                usersArray.length = 0;  // Limpa o array antes de adicionar um novo usuário
                 usersArray.push(newUser);
-            }
 
-            // Armazene o array atualizado em um cookie
-            res.cookie('users', JSON.stringify(usersArray), { path: '/shop' }); // Defina o caminho correto
-
-            console.log("Usuários atualizados:", usersArray);
+            console.log("Usuários atualizados:", User.getAll());
             // Redirecione para a rota de shop após definir o cookie
             res.redirect('/shop');
         } else {

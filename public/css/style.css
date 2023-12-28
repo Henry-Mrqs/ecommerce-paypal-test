@@ -212,7 +212,7 @@ body{
         margin-top: 3px;
     }
 
-    div.call-to-action button {
+    div.call-to-action .button-buy {
         width: 75px;
         height: 40px;
         outline: none;
@@ -221,7 +221,7 @@ body{
         box-shadow: 10px 10px 40px rgba(0,0,0,.1);
         padding: 0;
     }
-    div.call-to-action button:hover{
+    div.call-to-action .button-buy:hover{
         border: 3px solid #f1c40f;
         box-shadow: 10px 10px 40px rgba(0,0,0,.2);
         background: #ecf0f1;
@@ -299,6 +299,19 @@ body{
         border: 3px solid #f1c40f;
         box-shadow: 0 8px 32px 0 rgba(209, 255, 199, 0.37);
         background: rgba(255, 255, 255, 0.457);
+    }
+
+    .incrase-decrase form{
+        margin: 0;
+    }
+
+    .incrase-decrase button{
+        background: transparent;
+        border: none;
+        outline: none;
+        width: 16px;
+        height: 16px;
+        padding: 0;
     }
 
 
