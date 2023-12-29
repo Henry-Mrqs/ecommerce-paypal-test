@@ -4,14 +4,6 @@ import { Product } from "../models/Product";
 import { User } from "../models/User";
 import { CartProducts } from "../models/Cart";
 
-import * as paypal from 'paypal-rest-sdk';
-
-paypal.configure({
-    'mode': 'sandbox',
-    'client_id': 'AfiS4D8ip-sTrn42U_HJT1DH0jg4nZvXYLA_M_mLXklxl2vCUjyY98iyHoaOY3oRd-MGXd5YkkdfZoPE',
-    'client_secret': 'ELR3Q5H6dK991eTLTZXZqY2_PfjoGlx9N1J0SY5nBsEDqch3vvC7f4TA8WH88eZQXPIeN9gUvSo4O-Ms'
-})
-
 
 export const shop = (req: Request, res: Response) => {
     let productList = Product.getAll();
@@ -53,6 +45,7 @@ export const shopCart = (req: Request, res: Response) => {
                     const findindex = cartList.findIndex(product => product.productId === newCartProduct.productId);
 
                     cartList.splice(findindex, 1)
+                    cartList[existingProductIndex].amount = +cartList[existingProductIndex].amount;
                 }
 
             } else {
@@ -60,6 +53,14 @@ export const shopCart = (req: Request, res: Response) => {
             }
 
             console.log("Carrinho atualizado:", CartProducts.getAll());
+
+            const cartAmount = CartProducts.totalProducts();
+            const cartValue = CartProducts.totalPrice();
+            const cartSku = CartProducts.cartSku();
+
+            console.log('Amount ----- ', cartAmount)
+            console.log('Value Total ----- ', cartValue)
+            console.log('Meu SKU ----- ', cartSku)
 
             res.render('pages/shop', {
                 cartList,
@@ -78,3 +79,85 @@ export const shopCart = (req: Request, res: Response) => {
 
 
 
+
+
+
+
+
+export const pay = (req: Request, res: Response) => {
+
+    const cartProducts = CartProducts.getAll();
+    const cartAmount = CartProducts.totalProducts();
+    const cartValue = CartProducts.totalPrice();
+    const cartSku = CartProducts.cartSku();
+
+}
+
+
+
+
+const base = "https://api-m.sandbox.paypal.com";
+const clientId = 'AYO-tPiuAS1kk2DvBCfhc7tOAi_Pt97_gvwjAPPBtQe5pmLbf2eyuBX20R2y2YCHDYBAspGj_oeB03xZ'
+const clientSecret = 'EKBAGopfE2bWWV1_N15fjsbTY9sZIciWcq-GybK1oT6vdgwTfUgmnIQoe8Kbtqdler6TII29gcElVvd9'
+
+const generateAccessToken = async () => {
+  try {
+    if (!clientId || !clientSecret) {
+      throw new Error("MISSING_API_CREDENTIALS");
+    }
+    const auth = Buffer.from(
+        clientId + ":" + clientSecret,
+    ).toString("base64");
+    const response = await fetch(`${base}/v1/oauth2/token`, {
+      method: "POST",
+      body: "grant_type=client_credentials",
+      headers: {
+        Authorization: `Basic ${auth}`,
+      },
+    });
+    
+    const data = await response.json();
+    return data.access_token;
+  } catch (error) {
+    console.error("Failed to generate Access Token:", error);
+  }
+};
+
+const cart = CartProducts.getAll()
+const createOrder = async (cart: object) => {
+    // use the cart information passed from the front-end to calculate the purchase unit details
+    console.log(
+      "shopping cart information passed from the frontend createOrder() callback:",
+      cart,
+    );
+    
+    const accessToken = await generateAccessToken();
+    const url = `${base}/v2/checkout/orders`;
+    const payload = {
+      intent: "CAPTURE",
+      purchase_units: [
+        {
+          amount: {
+            currency_code: "USD",
+            value: "100.00",
+          },
+        },
+      ],
+    };
+    
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        // Uncomment one of these to force an error for negative testing (in sandbox mode only). Documentation:
+        // https://developer.paypal.com/tools/sandbox/negative-testing/request-headers/
+        // "PayPal-Mock-Response": '{"mock_application_codes": "MISSING_REQUIRED_PARAMETER"}'
+        // "PayPal-Mock-Response": '{"mock_application_codes": "PERMISSION_DENIED"}'
+        // "PayPal-Mock-Response": '{"mock_application_codes": "INTERNAL_SERVER_ERROR"}'
+      },
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+    
+    //return handleResponse(response);
+  };

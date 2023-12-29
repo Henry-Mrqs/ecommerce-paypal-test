@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { home, homeSubmit } from "../controllers/homeController";
-import { shopCart, shop } from "../controllers/shopController";
+import { shopCart, shop, pay } from "../controllers/shopController";
 
 const router = Router();
 
@@ -9,5 +9,7 @@ router.post('/', homeSubmit);
 
 router.get('/shop', shop);
 router.post('/shop', shopCart);
+
+router.post('/pay', pay);
 
 export default router;

@@ -13,10 +13,13 @@ export const CartProducts = {
         return products;
     },
     totalProducts: () => {
-        return products.reduce((total, product) => total + product.amount, 0);
+        return products.reduce((total, product) => total + +product.amount, 0);
     },
     totalPrice: () => {
         return products.reduce((total, product) => total + (product.price * product.amount), 0);
+    },
+    cartSku: () => {
+        return products.reduce((total, product) => total + structuredClone(product.productId), 0);
     }
 };
 
