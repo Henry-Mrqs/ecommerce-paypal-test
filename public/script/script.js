@@ -70,12 +70,20 @@ url_to_head(
           const order_details = await response.json();
           console.log(order_details);
 
-          alert("Successful!");
-
           //Close out the PayPal buttons that were rendered
           paypal_buttons.close();
 
-          //add redirect
+          const successMessage = document.querySelector("#send-cart");
+
+          successMessage.insertAdjacentHTML(
+            "afterbegin",
+            `
+              <div class="success-message">
+                <p><strong>Thank you for purchase</strong></p>
+                <p><strong>purchase id:</strong> ${order_id}</p>
+              </div>
+            `
+          );
         } catch (error) {
           console.log(error);
           alert("An Error Ocurred!");

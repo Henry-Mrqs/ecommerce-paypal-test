@@ -26,7 +26,11 @@ export const createOrder = async (req: Request, res: Response) => {
               currency_code: "USD",
               value: cartValue.toString(),
             },
-            shipping_address: {
+            shipping: {
+              name: {
+                full_name: userInfo[0].name + " " + userInfo[0].lastName,
+              },
+              type: "SHIPPING",
               line1: userInfo[0].address.line1,
               line2: userInfo[0].address.line2,
               country_code: "US",
@@ -76,7 +80,7 @@ export const completeOrder = async (req: Request, res: Response) => {
         .then((json) => {
           console.log(json);
           res.send(json);
-        }); //Send minimal data to client
+        });
     })
     .catch((err) => {
       console.log(err);

@@ -21,20 +21,15 @@ export const shopCart = (req: Request, res: Response) => {
 
       // Obtenha o array de usuários
       const cartList = CartProducts.getAll();
-
       let productList = Product.getAll();
-
-      // Adicione o novo produto
       const existingProductIndex = cartList.findIndex(
         (product) => product.productId === newCartProduct.productId
       );
 
-      console.log("a certificação está retornando:", existingProductIndex);
+      console.log("A verificação está retornando:", existingProductIndex);
 
-      // Se já existe, substitua-o; caso contrário, adicione o novo usuário
       if (existingProductIndex !== -1) {
         if (!newCartProduct.remove) {
-          // Converta para número antes de realizar a soma
           cartList[existingProductIndex].amount =
             +cartList[existingProductIndex].amount + 1;
         } else if (
@@ -44,13 +39,7 @@ export const shopCart = (req: Request, res: Response) => {
           cartList[existingProductIndex].amount =
             +cartList[existingProductIndex].amount - 1;
         } else {
-          const findindex = cartList.findIndex(
-            (product) => product.productId === newCartProduct.productId
-          );
-
-          cartList.splice(findindex, 1);
-          cartList[existingProductIndex].amount =
-            +cartList[existingProductIndex].amount;
+          cartList.splice(existingProductIndex, 1);
         }
       } else {
         cartList.push(newCartProduct);
