@@ -12,55 +12,60 @@ const base = "https://api-m.sandbox.paypal.com";
 
 export const createOrder = async (req: Request, res: Response) => {
   const cartValue = CartProducts.totalPrice();
-  const userInfo = User.getAll();
+  const userList = User.getAll();
+  const user = userList[0];
 
-  generateAccessToken()
-    .then((access_token) => {
-      let order_data_json = {
-        intent: "CAPTURE",
-        purchase_units: [
-          {
-            reference_id: "store_mobile_world_order_1234",
-            description: "Mobile World Store order-1234",
-            amount: {
-              currency_code: "USD",
-              value: cartValue.toString(),
-            },
-            shipping: {
-              name: {
-                full_name: userInfo[0].name + " " + userInfo[0].lastName,
-              },
-              type: "SHIPPING",
-              line1: userInfo[0].address.line1,
-              line2: userInfo[0].address.line2,
-              country_code: "US",
-              postal_code: userInfo[0].address.zip,
-              state: userInfo[0].address.state,
-              phone: userInfo[0].phone,
-            },
-            shipping_method: "United Postal Service",
-          },
-        ],
-      };
-      const data = JSON.stringify(order_data_json);
-
-      fetch(base + "/v2/checkout/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${access_token}`,
+  try {
+    const accessToken = await generateAccessToken();
+    console.log(accessToken);
+    let order_data_json = {
+      intent: "CAPTURE",
+      payer: {
+        name: {
+          given_name: user.name,
+          surname: user.lastName,
         },
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          res.send(json);
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send(err);
+        email_address: user.email,
+      },
+      purchase_units: [
+        {
+          reference_id: "store_mobile_world_order_1234",
+          description: "Mobile World Store order-1234",
+          amount: {
+            currency_code: "USD",
+            value: cartValue.toString(),
+          },
+          shipping: {
+            name: {
+              full_name: user.name + " " + user.lastName,
+            },
+            address: {
+              country_code: "US",
+              address_line_1: user.address.line1,
+              address_line_2: user.address.line2,
+              postal_code: user.address.zip,
+              admin_area_2: "City",
+              admin_area_1: "NY",
+            },
+          },
+        },
+      ],
+    };
+    const data = JSON.stringify(order_data_json);
+
+    const responseCheckout = await fetch(base + "/v2/checkout/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: data,
     });
+    const order = await responseCheckout.json();
+    return res.json({ order }).status(200);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const completeOrder = async (req: Request, res: Response) => {

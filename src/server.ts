@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import path from "path";
 import mustache from "mustache-express";
 import mainRoutes from "./routes/index";
+import bodyParser from "body-parser";
 
 const server = express();
 
@@ -11,8 +12,7 @@ server.engine("mustache", mustache());
 
 server.use(express.static(path.join(__dirname, "../public")));
 server.use(express.urlencoded({ extended: true }));
-
-// Adicione o middleware cookie-parser
+server.use(bodyParser.json());
 
 server.use(mainRoutes);
 

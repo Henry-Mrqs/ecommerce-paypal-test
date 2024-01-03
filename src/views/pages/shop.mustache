@@ -1,6 +1,14 @@
-{{>partials/head}}
 <head>
-    <script src="/script/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">   
+    <script src="/script/script.js"></script> 
+    <title>Shop</title>
 </head>
 <body>
     <div class="container-shop">
@@ -16,10 +24,10 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="https://paypal-test-85mo.onrender.com/">Home</a>
+                                        <a class="nav-link active" aria-current="page" href="http://localhost/">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="https://paypal-test-85mo.onrender.com/shop">Shop</a>
+                                        <a class="nav-link active" aria-current="page" href="http://localhost/shop">Shop</a>
                                     </li>
                                 </ul>
                                 {{!--
@@ -127,64 +135,5 @@
             }
         })
     </script>
-
-    <script>
-        function updateCartDisplay() {
-        var cartContent = document.getElementById('cart-content');
-        var sendCart = document.querySelector('#send-cart form');
-        var productsInCart = JSON.parse(localStorage.getItem('cart') || '[]');
-
-        // Limpe o conteúdo atual do carrinho
-        cartContent.innerHTML = '';
-        clearFormContent(); // Limpe apenas o botão "Finish"
-
-        // Adicione os produtos ao carrinho
-        productsInCart.forEach(product => {
-            console.log('Product:', product); // Log para verificar o produto
-
-            var productElement = document.createElement('div');
-            productElement.innerHTML = `
-                <div class="product-resume">
-                    <img src="/assets/${product.image}" alt="${product.name}">
-                    <div class="description">
-                        <p class="name-product">${product.name}</p>
-                        <p class="value-product">${product.price}</p>
-                    </div>
-                    <div class="quantity-product">
-                        <p>${product.quantity}</p>
-                        <div class="incrase-decrase">
-                            <i class="fa fa-plus-circle" aria-hidden="true" onclick="changeQuantity('${product.productId}', 1)"></i>
-                            <i class="fa fa-minus-circle" aria-hidden="true" onclick="changeQuantity('${product.productId}', -1)"></i>
-                        </div>
-                    </div>
-                </div>`;
-            cartContent.appendChild(productElement);
-        });
-
-        // Adicione o botão "Finish" apenas se houver produtos no carrinho
-        var btnSendCart = document.querySelector('.send-cart-btn');
-        console.log('Products in Cart:', productsInCart); // Log para verificar os produtos no carrinho
-
-        if (productsInCart.length > 0 && !btnSendCart) {
-            btnSendCart = document.createElement('button');
-            btnSendCart.className = 'send-cart-btn finish-button'; // Adiciona a classe 'finish-button'
-            btnSendCart.type = 'submit';
-            btnSendCart.textContent = 'Finish';
-            btnSendCart.onclick = function() {
-                console.log('Sending data to the server:', JSON.stringify(productsInCart));
-            };
-            sendCart.appendChild(btnSendCart);
-            console.log('Finish button added'); // Log para verificar se o botão "Finish" foi adicionado
-        } else if (productsInCart.length === 0 && btnSendCart) {
-            // Remova o botão se o carrinho estiver vazio
-            btnSendCart.remove();
-            console.log('Finish button removed'); // Log para verificar se o botão "Finish" foi removido
-        }
-
-        // Calcule o total e armazene em sessionStorage
-        calculateAndStoreTotal();
-    }
-
-    </scrip>
 </body>
 </html>

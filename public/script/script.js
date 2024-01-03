@@ -30,7 +30,7 @@ url_to_head(
   paypal_sdk_url +
     "?client-id=" +
     client_id +
-    "&enable-funding=venmo&currency=" +
+    "&currency=" +
     currency +
     "&intent=" +
     intent
@@ -46,33 +46,29 @@ url_to_head(
 
       createOrder: async function (data, actions) {
         //https://developer.paypal.com/docs/api/orders/v2/#orders_create
-        const response = await fetch(
-          "https://paypal-test-85mo.onrender.com/create_order",
-          {
-            method: "post",
-            headers: { "Content-Type": "application/json; charset=utf-8" },
-            body: JSON.stringify({ intent: intent }),
-          }
-        );
-        const order = await response.json();
-        return order.id;
+        const response = await fetch("http://localhost:80/create_order", {
+          method: "post",
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          body: JSON.stringify({ intent: intent }),
+        });
+
+        const responseOrder = await response.json();
+        return responseOrder.order.id;
       },
 
       onApprove: async function (data, actions) {
+        console.log(data);
         let order_id = data.orderID;
         console.log(intent);
         try {
-          const response = await fetch(
-            "https://paypal-test-85mo.onrender.com/complete_order",
-            {
-              method: "post",
-              headers: { "Content-Type": "application/json; charset=utf-8" },
-              body: JSON.stringify({
-                intent: intent,
-                order_id: order_id,
-              }),
-            }
-          );
+          const response = await fetch("http://localhost:80/complete_order", {
+            method: "post",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify({
+              intent: intent,
+              order_id: order_id,
+            }),
+          });
           const order_details = await response.json();
           console.log(order_details);
 

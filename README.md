@@ -23,6 +23,18 @@
 
 A aplicação está hospedada e pode ser acessada em [`Your Shopping`](https://paypal-test-85mo.onrender.com).
 
+#### - Use as credenciais do PayPal Sandbox abaixo para testar a aplicação
+
+##### - Comprador
+
+- Email:`sb-u3ufm28960010@personal.example.com`
+- Senha:`GN$8f!TU`
+
+##### - Vendedor
+
+- Email:`sb-69lz728959210@business.example.com`
+- Senha:`b@=Ol69B`
+
 ## ✨ Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
