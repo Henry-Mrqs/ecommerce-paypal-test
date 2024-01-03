@@ -1,4 +1,4 @@
-<h1 align="center">NPS-NLW</h1>
+<h1 align="center">Your Shop</h1>
 
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -31,7 +31,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O PayPal-Ecommerce destaca-se ao exemplificar o fluxo de pagamento com o PayPal SDK, integrando-o ao e-commerce para transações seguras e práticas. Desenvolvido com TypeScript, NodeJS, Bootstrap, Express e Mustache, o projeto proporciona uma experiência de compra online fluida e segura, explorando eficazmente essas tecnologias.
+O Your Shop destaca-se ao exemplificar o fluxo de pagamento com o PayPal SDK, integrando-o ao e-commerce para transações seguras e práticas. Desenvolvido com TypeScript, NodeJS, Bootstrap, Express e Mustache, o projeto proporciona uma experiência de compra online fluida e segura, explorando eficazmente essas tecnologias.
 
 Durante o desenvolvimento, priorizamos a eficiência ao utilizar TypeScript para codificação robusta e NodeJS no backend para escalabilidade. O Bootstrap proporcionou uma interface moderna e responsiva. A gestão de rotas e lógica de negócios foi facilitada pelo Express, enquanto o Mustache viabilizou a renderização de páginas de forma simples e eficaz. Assim, o PayPal-Ecommerce não apenas integra o PayPal SDK, mas também destaca a eficácia de tecnologias modernas para uma experiência de pagamento online fluída e segura.
 
@@ -39,7 +39,7 @@ Durante o desenvolvimento, priorizamos a eficiência ao utilizar TypeScript para
 
 - Clone o repositório
 - Instale as dependências com `npm install`
-- Inicie o a aplicação com `npm start`
+- Inicie a aplicação com `npm start`
 - Em caso de desenvolvimento `npm run start-dev`
 
 A aplicação pode ser acessada em [`localhost`](http://localhost).
@@ -48,7 +48,7 @@ Ajuste as rotas usando `Ctrl + Shift + H` ajustando de `https://paypal-test-85mo
 
 ## 📄 Licença
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/Henry-Mrqs/ecommerce-paypal-test/blob/main/LICENSE) para mais detalhes.
 
 ---
 
