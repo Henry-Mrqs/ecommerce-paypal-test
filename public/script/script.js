@@ -46,11 +46,14 @@ url_to_head(
 
       createOrder: async function (data, actions) {
         //https://developer.paypal.com/docs/api/orders/v2/#orders_create
-        const response = await fetch("http://localhost:80/create_order", {
-          method: "post",
-          headers: { "Content-Type": "application/json; charset=utf-8" },
-          body: JSON.stringify({ intent: intent }),
-        });
+        const response = await fetch(
+          "https://paypal-test-85mo.onrender.com/create_order",
+          {
+            method: "post",
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            body: JSON.stringify({ intent: intent }),
+          }
+        );
 
         const responseOrder = await response.json();
         return responseOrder.order.id;
@@ -61,7 +64,7 @@ url_to_head(
         let order_id = data.orderID;
         console.log(intent);
         try {
-          const response = await fetch("http://localhost:80/complete_order", {
+          const response = await fetch("https://paypal-test-85mo.onrender.com/complete_order", {
             method: "post",
             headers: { "Content-Type": "application/json; charset=utf-8" },
             body: JSON.stringify({
