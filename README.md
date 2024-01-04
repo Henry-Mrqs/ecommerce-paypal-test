@@ -22,6 +22,7 @@
 # 🖱 Teste você mesmo
 
 A aplicação está hospedada e pode ser acessada em [`Your Shopping`](https://paypal-test-85mo.onrender.com).
+Obs: Devido a hospedagem gratuita, a primeira vez que o site abrir ele vai ter um load um pouquinho mais demorado, mas é só esperar!
 
 #### - Use as credenciais do PayPal Sandbox abaixo para testar a aplicação
 
